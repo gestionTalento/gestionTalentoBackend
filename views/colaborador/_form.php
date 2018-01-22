@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
 /* @var $model app\models\Colaborador */
 /* @var $form yii\widgets\ActiveForm */ 
@@ -22,7 +23,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'apellidosColaborador')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'idSucursal')->textInput() ?>
 
     <?= $form->field($model, 'idArea')->textInput() ?>
 
@@ -42,12 +42,34 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'idestado')->textInput() ?>
 
-    <?= $form->field($model, 'idCC')->textInput() ?>
+    <?=
+    $form->field($model, "idCC")->widget(Select2::classname(), [
+       'data' => ArrayHelper::map(app\models\Icentrocosto::find()->orderBy('idCC')->all(), 'idCC', 'nombreCC'),
+       'language' => 'es',
+       'options' => ['placeholder' => 'Seleccione un centro de costo ...'],
+       'pluginOptions' => [
+        'allowClear' => true
+    ],
+]);
+?>
+<?=
+$form->field($model, "idSucursal")->widget(Select2::classname(), [
+   'data' => ArrayHelper::map(app\models\Sucursal::find()->orderBy('idSucursal')->all(), 'idSucursal', 'nombreSucursal'),
+   'language' => 'es',
+   'options' => ['placeholder' => 'Seleccione un centro de costo ...'],
+   'pluginOptions' => [
+    'allowClear' => true
+],
+]);
+?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+
+
+<div class="form-group">
+    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+</div>
+
+<?php ActiveForm::end(); ?>
 
 </div>
