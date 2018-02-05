@@ -36,11 +36,21 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav navbar-center'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Empresa', 'url' => ['/empresa/index']],
+            ['label' => 'Sucursal', 'url' => ['/sucursal/index']],
+            ['label' => 'Colaborador', 'url' => ['/colaborador/index']],
+            ['label' => 'Perfil Red Social', 'url' => ['/perfil-red/index']],
+            ['label' => 'Area', 'url' => ['/area/index']],
+            ['label' => 'Cargos', 'url' => ['/cargos/index']],
+            ['label' => 'Rol', 'url' => ['/rol/index']],
+            ['label' => 'Gerencia', 'url' => ['/gerencia/index']],
+            ['label' => 'Estado Colaborador', 'url' => ['/estadocolaborador/index']],
+            ['label' => 'Perfil', 'url' => ['/perfil/index']],
+            ['label' => 'Estadistica', 'url' => ['/restadisticas/index']],
+            ['label' => 'Tipo Post', 'url' => ['/tipo-post/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

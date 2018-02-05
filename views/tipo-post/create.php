@@ -4,19 +4,18 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Colaborador */
+/* @var $model app\models\Rtipopost */
 
-$this->title = 'Create Colaborador';
-$this->params['breadcrumbs'][] = ['label' => 'Colaboradors', 'url' => ['index']];
+$this->title = 'Create Rtipopost';
+$this->params['breadcrumbs'][] = ['label' => 'Rtipoposts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="colaborador-create">
+<div class="rtipopost-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
-        'perfil' => $perfil,
     ]) ?>
 
 </div>

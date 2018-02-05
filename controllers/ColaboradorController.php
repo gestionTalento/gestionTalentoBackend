@@ -4,10 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Colaborador;
+use app\models\Restadisticas;
 use app\models\ColaboradorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Rperfilredsocial;
+use yii\web\UploadedFile;
+use yii\web\Response;
+use yii\imagine\Image;
 
 /**
  * ColaboradorController implements the CRUD actions for Colaborador model.
@@ -74,14 +79,69 @@ class ColaboradorController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Colaborador();
+       
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'rutColaborador' => $model->rutColaborador, 'idSucursal' => $model->idSucursal, 'idArea' => $model->idArea, 'idCargo' => $model->idCargo, 'idRol' => $model->idRol, 'idGerencia' => $model->idGerencia, 'idperfil' => $model->idperfil, 'idperfilRed' => $model->idperfilRed, 'idestadisticas' => $model->idestadisticas, 'idestado' => $model->idestado, 'idCC' => $model->idCC]);
+        $model = new Colaborador();
+        $perfil = new Rperfilredsocial();
+        
+        if ($perfil->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) ) {
+          // var_dump($model);die();
+            $perfil->file = UploadedFile::getInstances($perfil, 'rfoto');
+            ini_set('memory_limit', '512M');
+            $num = rand(5, 600);
+             if (empty($perfil->file)) {
+                    $perfil->rfoto = 'nada.png';
+                    $perfil->rportada = 'ricardo2.jpg';
+                } else {
+                    foreach ($perfil->file as $file) {
+                        ini_set('memory_limit', '512M');
+                        $file->saveAs('img/perfil/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension);
+                        Image::thumbnail('img/perfil/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension, 200, 187)
+                                ->save('img/perfil/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension, ['quality' => 100]);
+
+                        ini_set('memory_limit', '512M');
+
+                        $ruta = 'img/perfil/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension;
+                        Image::thumbnail($ruta, 120, 120)
+                                ->save('img/perfil/t/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension, ['quality' => 50]);
+                        $perfil->rfoto = $model->rutColaborador . $file->baseName . $num . "." . $file->extension;
+                        $perfil->rportada = 'ricardo2.jpg';
+                    }
+                }
+                     
+                     $perfil->idperfilRed = $model->idperfilRed;
+                     $perfil->save(false);
+                     //var_dump($perfil->idperfilRed);die();
+                     $model->idperfilRed = $perfil->idperfilRed;
+                     
+                     $estadisticas = new Restadisticas();
+                     $estadisticas->idestadisticas = $model->idestadisticas;
+                     
+                     $estadisticas->save(false);
+                     $model->idestadisticas = $estadisticas->idestadisticas;
+                     $model->save(false);
+                
+                     
+                     //var_dump($model);die();
+                        
+                     return $this->render('view',[
+                        'model' =>$model,
+                        'perfil' =>  $perfil,]);
+                 
+          
         }
+            
+        /*
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->idperfilRed = $perfil->idperfilRed;
+            return $this->redirect(['view', 'rutColaborador' => $model->rutColaborador, 'idSucursal' => $model->idSucursal, 'idArea' => $model->idArea, 'idCargo' => $model->idCargo, 'idRol' => $model->idRol, 'idGerencia' => $model->idGerencia, 'idperfil' => $model->idperfil, 'idperfilRed' => $perfil->idperfilRed, 'idestadisticas' => $model->idestadisticas, 'idestado' => $model->idestado, 'idCC' => $model->idCC]);
+            $model->save(false);
+        }
+        */
 
         return $this->render('create', [
             'model' => $model,
+            'perfil' =>$perfil,
         ]);
     }
 
@@ -105,12 +165,14 @@ class ColaboradorController extends Controller
     public function actionUpdate($rutColaborador, $idSucursal, $idArea, $idCargo, $idRol, $idGerencia, $idperfil, $idperfilRed, $idestadisticas, $idestado, $idCC)
     {
         $model = $this->findModel($rutColaborador, $idSucursal, $idArea, $idCargo, $idRol, $idGerencia, $idperfil, $idperfilRed, $idestadisticas, $idestado, $idCC);
+        $perfil = $this->findPerfil($idperfilRed);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'rutColaborador' => $model->rutColaborador, 'idSucursal' => $model->idSucursal, 'idArea' => $model->idArea, 'idCargo' => $model->idCargo, 'idRol' => $model->idRol, 'idGerencia' => $model->idGerencia, 'idperfil' => $model->idperfil, 'idperfilRed' => $model->idperfilRed, 'idestadisticas' => $model->idestadisticas, 'idestado' => $model->idestado, 'idCC' => $model->idCC]);
+            return $this->redirect(['view', 'rutColaborador' => $model->rutColaborador, 'idSucursal' => $model->idSucursal, 'idArea' => $model->idArea, 'idCargo' => $model->idCargo, 'idRol' => $model->idRol, 'idGerencia' => $model->idGerencia, 'idperfil' => $model->idperfil, 'idperfilRed' => $perfil->idperfilRed, 'idestadisticas' => $model->idestadisticas, 'idestado' => $model->idestado, 'idCC' => $model->idCC]);
         }
 
         return $this->render('update', [
+            'perfil' =>$perfil,
             'model' => $model,
         ]);
     }
@@ -156,12 +218,19 @@ class ColaboradorController extends Controller
      * @return Colaborador the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($rutColaborador, $idSucursal, $idArea, $idCargo, $idRol, $idGerencia, $idperfil, $idperfilRed, $idestadisticas, $idestado, $idCC)
+    public function findModel($rutColaborador)
     {
-        if (($model = Colaborador::findOne(['rutColaborador' => $rutColaborador, 'idSucursal' => $idSucursal, 'idArea' => $idArea, 'idCargo' => $idCargo, 'idRol' => $idRol, 'idGerencia' => $idGerencia, 'idperfil' => $idperfil, 'idperfilRed' => $idperfilRed, 'idestadisticas' => $idestadisticas, 'idestado' => $idestado, 'idCC' => $idCC])) !== null) {
+        if (($model = Colaborador::findOne(['rutColaborador' => $rutColaborador])) !== null){
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function findPerfil($id) {
+        if (($model = Rperfilredsocial::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

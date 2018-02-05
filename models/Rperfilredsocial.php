@@ -21,6 +21,7 @@ class Rperfilredsocial extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'rperfilredsocial';
@@ -33,7 +34,8 @@ class Rperfilredsocial extends \yii\db\ActiveRecord
     {
         return [
             [['rrotador', 'restado'], 'integer'],
-            [['rfoto', 'rportada'], 'string', 'max' => 200],
+            [['rfoto'], 'file'],
+            [['file'], 'file', 'maxSize' => 8120000, 'tooBig' => 'excede el limite, 8 MB Aprox', 'extensions' => 'png, jpg'],
             [['rbio'], 'string', 'max' => 500],
         ];
     }
@@ -45,9 +47,9 @@ class Rperfilredsocial extends \yii\db\ActiveRecord
     {
         return [
             'idperfilRed' => 'Idperfil Red',
-            'rfoto' => 'Rfoto',
-            'rportada' => 'Rportada',
-            'rbio' => 'Rbio',
+            'rfoto' => 'Foto de Perfil',
+            'rportada' => 'Portada',
+            'rbio' => 'Biografia',
             'rrotador' => 'Rrotador',
             'restado' => 'Restado',
         ];

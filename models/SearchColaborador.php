@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Colaborador;
 
 /**
- * ColaboradorSearch represents the model behind the search form of `app\models\Colaborador`.
+ * SearchColaborador represents the model behind the search form of `app\models\Colaborador`.
  */
-class ColaboradorSearch extends Colaborador
+class SearchColaborador extends Colaborador
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class ColaboradorSearch extends Colaborador
     {
         return [
             [['rutColaborador', 'idSucursal', 'idArea', 'idCargo', 'idRol', 'idGerencia', 'westadoJefe', 'idperfil', 'idperfilRed', 'idestadisticas', 'idestado', 'idCC'], 'integer'],
-            [['dvColaborador', 'pass', 'nombreColaborador', 'apellidosColaborador', 'correo'], 'safe'],
+            [['dvColaborador', 'pass', 'nombreColaborador', 'apellidosColaborador', 'correo', 'telefono', 'direccion'], 'safe'],
         ];
     }
 
@@ -71,14 +71,15 @@ class ColaboradorSearch extends Colaborador
             'idestadisticas' => $this->idestadisticas,
             'idestado' => $this->idestado,
             'idCC' => $this->idCC,
-            'correo' => $this->correo,
         ]);
 
         $query->andFilterWhere(['like', 'dvColaborador', $this->dvColaborador])
             ->andFilterWhere(['like', 'pass', $this->pass])
             ->andFilterWhere(['like', 'nombreColaborador', $this->nombreColaborador])
             ->andFilterWhere(['like', 'apellidosColaborador', $this->apellidosColaborador])
-            ->andFilterWhere(['like', 'correo', $this->correo]);
+            ->andFilterWhere(['like', 'correo', $this->correo])
+            ->andFilterWhere(['like', 'telefono', $this->telefono])
+            ->andFilterWhere(['like', 'direccion', $this->direccion]);
 
         return $dataProvider;
     }

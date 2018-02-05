@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ControllerSearch */
+/* @var $model app\models\SearchColaborador */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -46,6 +46,12 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'idestado') ?>
 
     <?php // echo $form->field($model, 'idCC') ?>
+
+    <?php // echo $form->field($model, 'correo') ?>
+
+    <?php // echo $form->field($model, 'telefono') ?>
+
+    <?php // echo $form->field($model, 'direccion') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ControllerSearch */
+/* @var $searchModel app\models\SearchColaborador */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Colaboradors';
@@ -26,8 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'rutColaborador',
-            'dvColaborador',
-            'pass',
+            //'dvColaborador',
+            'correo',
+            //'pass',
             'nombreColaborador',
             'apellidosColaborador',
             //'idSucursal',
@@ -35,12 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
             //'idCargo',
             //'idRol',
             //'idGerencia',
-            //'westadoJefe',
+            'westadoJefe',
             //'idperfil',
             //'idperfilRed',
             //'idestadisticas',
             //'idestado',
             //'idCC',
+            //'telefono',
+            //'direccion',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

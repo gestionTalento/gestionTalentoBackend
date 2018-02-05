@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+
 /* @var $this yii\web\View */
 /* @var $model app\models\Rperfilredsocial */
 /* @var $form yii\widgets\ActiveForm */
@@ -10,9 +11,9 @@ use yii\widgets\ActiveForm;
 
 <div class="rperfilredsocial-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options'=>['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'rfoto')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'rfoto')->fileInput(); ?>
 
     <?= $form->field($model, 'rportada')->textInput(['maxlength' => true]) ?>
 

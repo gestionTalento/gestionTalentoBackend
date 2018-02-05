@@ -44,6 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'idestadisticas',
             'idestado',
             'idCC',
+            'correo',
+            'telefono',
+            'direccion',
         ],
     ]) ?>
 

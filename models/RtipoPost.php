@@ -9,10 +9,8 @@ use Yii;
  *
  * @property int $ridtipo_post
  * @property string $rnombreTipoPost
- * @property int $ridAmigos
  *
- * @property Rpost[] $rposts
- * @property Ramigos $ridAmigos0
+ * @property Ractividad[] $ractividads
  */
 class RtipoPost extends \yii\db\ActiveRecord
 {
@@ -30,10 +28,7 @@ class RtipoPost extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ridAmigos'], 'required'],
-            [['ridAmigos'], 'integer'],
             [['rnombreTipoPost'], 'string', 'max' => 100],
-            [['ridAmigos'], 'exist', 'skipOnError' => true, 'targetClass' => Ramigos::className(), 'targetAttribute' => ['ridAmigos' => 'rIdAmigos']],
         ];
     }
 
@@ -45,23 +40,14 @@ class RtipoPost extends \yii\db\ActiveRecord
         return [
             'ridtipo_post' => 'Ridtipo Post',
             'rnombreTipoPost' => 'Rnombre Tipo Post',
-            'ridAmigos' => 'Rid Amigos',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRposts()
+    public function getRactividads()
     {
-        return $this->hasMany(Rpost::className(), ['rtipoPost' => 'ridtipo_post']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRidAmigos0()
-    {
-        return $this->hasOne(Ramigos::className(), ['rIdAmigos' => 'ridAmigos']);
+        return $this->hasMany(Ractividad::className(), ['ridtipo_post' => 'ridtipo_post']);
     }
 }
