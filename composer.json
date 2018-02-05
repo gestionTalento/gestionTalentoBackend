@@ -19,7 +19,15 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "kartik-v/yii2-widget-select2": "@dev",
-        "yiisoft/yii2-imagine": "~2.0.0",
+        "karpoff/yii2-crop-image-upload": "*",
+        "bupy7/yii2-widget-cropbox": "*",
+        "maxmirazh33/yii2-uploadable-cropable-image": "*",
+        "raoul2000/yii2-jcrop-widget": "*",
+        "mootensai/yii2-enhanced-gii": "dev-master",
+        "kartik-v/yii2-mpdf": "dev-master",
+        "kartik-v/yii2-datecontrol": "dev-master",
+        "kartik-v/yii2-tree-manager": "dev-master",
+        "kartik-v/yii2-widget-fileinput": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
