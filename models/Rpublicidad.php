@@ -19,6 +19,7 @@ class Rpublicidad extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $file;
     public static function tableName()
     {
         return 'rpublicidad';
@@ -32,7 +33,9 @@ class Rpublicidad extends \yii\db\ActiveRecord
         return [
             [['rdescripcion', 'rfoto', 'rutEmpresa'], 'required'],
             [['rutEmpresa'], 'integer'],
-            [['rdescripcion', 'rfoto'], 'string', 'max' => 200],
+            [['rfoto'], 'file'],
+            [['file'], 'file', 'maxSize' => 8120000, 'tooBig' => 'excede el limite, 8 MB Aprox', 'extensions' => 'png, jpg'],
+            [['rdescripcion'], 'string', 'max' => 200],
             [['rutEmpresa'], 'exist', 'skipOnError' => true, 'targetClass' => Empresas::className(), 'targetAttribute' => ['rutEmpresa' => 'rutEmpresa']],
         ];
     }
@@ -44,9 +47,9 @@ class Rpublicidad extends \yii\db\ActiveRecord
     {
         return [
             'ridPublicidad' => 'Rid Publicidad',
-            'rdescripcion' => 'Rdescripcion',
-            'rfoto' => 'Rfoto',
-            'rutEmpresa' => 'Rut Empresa',
+            'rdescripcion' => 'Descripción',
+            'rfoto' => 'Foto',
+            'rutEmpresa' => 'Empresa',
         ];
     }
 

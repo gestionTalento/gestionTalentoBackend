@@ -42,12 +42,12 @@ class Restadisticas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idestadisticas' => 'Idestadisticas',
-            'rlikes' => 'Rlikes',
-            'rcomentarios' => 'Rcomentarios',
-            'rlikesr' => 'Rlikesr',
-            'rcomentariosr' => 'Rcomentariosr',
-            'rcontadorP' => 'Rcontador P',
+            'idestadisticas' => 'Id Estadisticas',
+            'rlikes' => 'Contador Likes Realizados',
+            'rcomentarios' => 'Contador Likes Realizados',
+            'rlikesr' => 'Contador Likes Recibidos',
+            'rcomentariosr' => 'Contador Comentarios Recibidos',
+            'rcontadorP' => 'Rotador P',
         ];
     }
 

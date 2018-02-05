@@ -44,9 +44,9 @@ class Ramigos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'rIdAmigos' => 'R Id Amigos',
-            'rut1' => 'Rut1',
-            'rut2' => 'Rut2',
+            'rIdAmigos' => 'Id Amigos',
+            'rut1' => 'Rut Colaborador 1',
+            'rut2' => 'Rut Colaborador 2',
         ];
     }
 
