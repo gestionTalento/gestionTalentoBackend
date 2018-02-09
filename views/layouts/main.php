@@ -54,6 +54,7 @@ AppAsset::register($this);
             ['label' => 'Amigos RedSocial', 'url' => ['/amigos/index']],
             ['label' => 'Centro Costo', 'url' => ['/centro-costo/index']],
             ['label' => 'Publicidad', 'url' => ['/publicidad/index']],
+            ['label' => 'Tareas', 'url' => ['/tarea/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

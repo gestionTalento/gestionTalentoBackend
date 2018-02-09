@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\RpublicidadSearch */
+/* @var $searchModel app\models\TareasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Rpublicidads';
+$this->title = 'Wtareas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="rpublicidad-index">
+<div class="wtarea-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Rpublicidad', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Wtarea', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,11 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'ridPublicidad',
-            'rdescripcion',
-            'rfoto',
-            'rutEmpresa',
-            'rlink',
+            'widtarea',
+            'wnombreTarea',
+            'wdescripcion',
+            'wfechainicio',
+            'wfechafin',
+            //'westado',
+            //'wfeedback',
+            //'idDependencias',
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

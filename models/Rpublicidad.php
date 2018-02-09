@@ -36,6 +36,7 @@ class Rpublicidad extends \yii\db\ActiveRecord
             [['rfoto'], 'file'],
             [['file'], 'file', 'maxSize' => 8120000, 'tooBig' => 'excede el limite, 8 MB Aprox', 'extensions' => 'png, jpg'],
             [['rdescripcion'], 'string', 'max' => 200],
+            [['rlink'], 'string', 'max' => 200],
             [['rutEmpresa'], 'exist', 'skipOnError' => true, 'targetClass' => Empresas::className(), 'targetAttribute' => ['rutEmpresa' => 'rutEmpresa']],
         ];
     }
@@ -50,6 +51,7 @@ class Rpublicidad extends \yii\db\ActiveRecord
             'rdescripcion' => 'Descripción',
             'rfoto' => 'Foto',
             'rutEmpresa' => 'Empresa',
+            'rlink' => 'Link externo'
         ];
     }
 

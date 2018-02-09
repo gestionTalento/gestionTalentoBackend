@@ -87,11 +87,12 @@ class ColaboradorController extends Controller
         if ($perfil->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post()) ) {
           // var_dump($model);die();
             $perfil->file = UploadedFile::getInstances($perfil, 'rfoto');
+            $perfil->file2 = UploadedFile::getInstances($perfil, 'rportada');
             ini_set('memory_limit', '512M');
             $num = rand(5, 600);
+            $num2 = rand(5,600);
              if (empty($perfil->file)) {
                     $perfil->rfoto = 'nada.png';
-                    $perfil->rportada = 'ricardo2.jpg';
                 } else {
                     foreach ($perfil->file as $file) {
                         ini_set('memory_limit', '512M');
@@ -105,7 +106,25 @@ class ColaboradorController extends Controller
                         Image::thumbnail($ruta, 120, 120)
                                 ->save('img/perfil/t/' . $model->rutColaborador . $file->baseName . $num . "." . $file->extension, ['quality' => 50]);
                         $perfil->rfoto = $model->rutColaborador . $file->baseName . $num . "." . $file->extension;
-                        $perfil->rportada = 'ricardo2.jpg';
+                        
+                    }
+                }
+                if (empty($perfil->file2)) {
+                    $perfil->rportada = 'ricardo2.jpg';
+                } else {
+                    foreach ($perfil->file2 as $file2) {
+                        ini_set('memory_limit', '512M');
+                        $file2->saveAs('img/portada/' . $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension);
+                        Image::thumbnail('img/portada/' . $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension, 200, 187)
+                                ->save('img/portada/' . $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension, ['quality' => 100]);
+
+                        ini_set('memory_limit', '512M');
+
+                        $ruta = 'img/portada/' . $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension;
+                        Image::thumbnail($ruta, 120, 120)
+                                ->save('img/portada/t/' . $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension, ['quality' => 50]);
+                        $perfil->rportada = $model->rutColaborador . $file2->baseName . $num2 . "." . $file2->extension;
+                        
                     }
                 }
                      
@@ -116,6 +135,10 @@ class ColaboradorController extends Controller
                      
                      $estadisticas = new Restadisticas();
                      $estadisticas->idestadisticas = $model->idestadisticas;
+                     $estadisticas->rlikes = 0;
+                     $estadisticas->rcomentarios = 0;
+                     $estadisticas->rlikesr = 0;
+                     $estadisticas->rcomentariosr = 0;
                      
                      $estadisticas->save(false);
                      $model->idestadisticas = $estadisticas->idestadisticas;
@@ -130,14 +153,7 @@ class ColaboradorController extends Controller
                  
           
         }
-            
-        /*
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->idperfilRed = $perfil->idperfilRed;
-            return $this->redirect(['view', 'rutColaborador' => $model->rutColaborador, 'idSucursal' => $model->idSucursal, 'idArea' => $model->idArea, 'idCargo' => $model->idCargo, 'idRol' => $model->idRol, 'idGerencia' => $model->idGerencia, 'idperfil' => $model->idperfil, 'idperfilRed' => $perfil->idperfilRed, 'idestadisticas' => $model->idestadisticas, 'idestado' => $model->idestado, 'idCC' => $model->idCC]);
-            $model->save(false);
-        }
-        */
+        
 
         return $this->render('create', [
             'model' => $model,

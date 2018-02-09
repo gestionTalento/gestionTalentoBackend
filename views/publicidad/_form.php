@@ -27,7 +27,7 @@ use yii\helpers\ArrayHelper;
     ],
 ]);
 ?>
-
+    <?= $form->field($model, 'rlink')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -22,6 +22,7 @@ class Rperfilredsocial extends \yii\db\ActiveRecord
      * @inheritdoc
      */
     public $file;
+    public $file2;
     public static function tableName()
     {
         return 'rperfilredsocial';
@@ -36,6 +37,8 @@ class Rperfilredsocial extends \yii\db\ActiveRecord
             [['rrotador', 'restado'], 'integer'],
             [['rfoto'], 'file'],
             [['file'], 'file', 'maxSize' => 8120000, 'tooBig' => 'excede el limite, 8 MB Aprox', 'extensions' => 'png, jpg'],
+            [['file2'], 'file', 'maxSize' => 8120000, 'tooBig' => 'excede el limite, 8 MB Aprox', 'extensions' => 'png, jpg'],
+            [['rportada'], 'file'],
             [['rbio'], 'string', 'max' => 500],
         ];
     }

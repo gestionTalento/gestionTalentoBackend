@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'rfoto')->fileInput(); ?>
 
-    <?= $form->field($model, 'rportada')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'rportada')->fileInput(); ?>
 
     <?= $form->field($model, 'rbio')->textInput(['maxlength' => true]) ?>
 
